@@ -1,0 +1,156 @@
+body {
+    padding: 0%;
+    background-color: rgb(167, 160, 160);
+    margin: 0%;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    height: 90vh;
+}
+
+.mainleft {
+    flex: 1;
+    background-color: beige;
+    height: 100%;
+}
+
+.topbar {
+    background-color: aliceblue;
+    height: 10vh;
+    text-align: center;
+}
+
+.home > h1 {
+    margin: 0%;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.projects > h1 {
+    margin: 0%;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+hr {
+    width: 95%;
+}
+
+.homeOptions {
+    padding: 5px;
+}
+
+.homeOptions > button > h2 {
+    margin: 0%;
+    padding-left: 10px;
+}
+
+.homeOptions > button {
+    border: 0px;
+    font-size: 1em;
+    display: inline-flex;
+    text-align: center;
+    align-items: center;
+    background-color: beige;
+    padding-bottom: 10px;
+} 
+
+.homeOptions > button > img {
+    height: 25px;
+}
+
+.heading {
+    height: 8vh;
+    padding: 1vh;
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+}
+
+.heading > h1 {
+    margin: 0%;
+    padding-left: 10px;
+    text-align: center;
+}
+
+.heading > img {
+    height: 40px;
+}
+
+.project {
+    background-color: beige;
+    margin-left: 10px;
+}
+
+
+.project > button {
+    background-color: beige;
+    align-items: center;
+    border: 0px;
+    display: inline-flex;
+    padding: 0%;
+    width: 100%;
+    text-align: start;
+    padding-bottom: 10px;
+}
+
+.project > button > img {
+    height: 25px;
+}
+
+.project > button > h1 {
+    padding-left: 10px;
+    margin: 0px;
+}
+
+#right {
+    flex: 3;
+    height: 100%;
+}
+
+#right > #details {
+    padding: 20px;
+}
+
+.task {
+    background-color: antiquewhite;
+    display: flex;
+    padding: 15px;
+    align-items: center;
+    text-align: center;
+}
+
+.task > p {
+    margin: 0%;
+    font-size: 1em;
+}
+
+.task > h1 {
+    margin: 0%;
+    font-size: 1.1em;
+    padding-right: 5px;
+}
+
+#proadd {
+    background-color: chocolate;
+    border: 0px;
+    height: 5vh;
+    width: 5vh;
+    margin: 10px;
+    font-size: 2em;
+    border-radius: 30px;
+}
+
+#addtask {
+    position:fixed;
+    background-color: chocolate;
+    bottom: 10px;
+    border: 0px;
+    border-radius: 30px;
+    font-size: 2em;
+    height: 5vh;
+    width: 5vh;
+    right: 20px;
+}
