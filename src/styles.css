@@ -61,13 +61,14 @@ hr {
 }
 
 .homeOptions > button {
+    width: 100%;
+    padding: 3px;
     border: 0px;
     font-size: 1em;
     display: inline-flex;
     text-align: center;
     align-items: center;
     background-color: beige;
-    padding-bottom: 10px;
 } 
 
 .homeOptions > button > img {
@@ -264,4 +265,8 @@ hr {
 #taskinfo {
     margin: 20px;
     margin-top: 10px;
+}
+
+#complete {
+    text-decoration: line-through;
 }

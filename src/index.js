@@ -16,6 +16,8 @@ class Task {
     }
 }
 
+var currentpro = '';
+
 let index = 0;
 
 class Project {
@@ -56,6 +58,7 @@ inbox.get('fitness').add("Go for a Run or Jog ","If weather permits, go outside 
 function makeleft() {
     const container = document.getElementById("left");
     container.innerHTML = '';
+    document.getElementById('inbox').style.backgroundColor = 'yellow';
     document.getElementById('image').innerHTML = '';
     for(const [key] of inbox) {
         let newElement = document.createElement("div");
@@ -67,6 +70,7 @@ function makeleft() {
     resetpro();
     document.getElementById('ProjectDetails').style.display = 'none';
     document.getElementById('mainleft').style.display = 'block';
+    document.getElementById('important').style.backgroundColor = 'beige';
 }
 
 function makeright() {
@@ -76,10 +80,20 @@ function makeright() {
         for(let i of inbox.get(key).project) {
             let newElement = document.createElement("div");
             container.appendChild(newElement).className = 'task';
-            newElement.innerHTML = '<h1>' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p>' + i['description'] +'</p>';
+            if(i['status']) {
+                newElement.innerHTML = '<input type="checkbox" id="check' + i.title.replaceAll(" ","") + '" checked>';
+                newElement.innerHTML += '<h1 id="complete">' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p id="complete">' + i['description'] +'</p>';
+            }
+            else {
+                newElement.innerHTML = '<input type="checkbox" id="check' + i.title.replaceAll(" ","") + '" unchecked>';
+                newElement.innerHTML += '<h1>' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p>' + i['description'] +'</p>';
+            }
             container.innerHTML += '<br>';
         }
     }
+    currentpro = '';
+    print(currentpro);
+    document.getElementById('addtask').style.display = 'none';
     document.getElementById('taskDetails').style.display = 'none';
 }
 
@@ -111,6 +125,25 @@ function visdash() {
     });
 }
 
+function checkstatus() {
+    for(const [key] of inbox) {
+        for(let i of inbox.get(key).project) {
+            document.getElementById('check' + i['title'].replaceAll(" ","")).addEventListener("change",() =>{
+                if(i['status']) {
+                    i['status'] = false;
+                }
+                else {
+                    i['status'] = true;
+                }
+                print(i.title + i['status']);
+                makeright();
+            });
+        }
+    }
+}
+
+checkstatus();
+
 visdash();
 
 document.getElementById('getProject').addEventListener("click",() => {
@@ -139,7 +172,10 @@ document.getElementById('getTask').addEventListener("click",() =>{
     var title = document.getElementById('title').value;
     var description = document.getElementById('description').value;
     var dueDate = document.getElementById('date').value;
-    inbox.get('home').add(title,description,dueDate,false);
+    inbox.get(currentpro).add(title,description,dueDate,false);
+    document.getElementById('date').value = '';
+    document.getElementById('title').value = '';
+    document.getElementById('description').value = '';
     makeright();
     print(inbox);
 });
@@ -152,6 +188,7 @@ function resetpro() {
             makeleft();
         });
     }
+    clickpro();
 }
 
 function clickpro() {
@@ -162,17 +199,34 @@ function clickpro() {
             for(let i of inbox.get(key).project) {
                 let newElement = document.createElement("div");
                 container.appendChild(newElement).className = 'task';
-                newElement.innerHTML = '<h1>' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p>' + i['description'] +'</p>';
+                if(i['status']) {
+                    newElement.innerHTML = '<input type="checkbox" id="check' + i.title.replaceAll(" ","") + '" checked>';
+                    newElement.innerHTML += '<h1 id="complete">' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p id="complete">' + i['description'] +'</p>';
+                }
+                else {
+                    newElement.innerHTML = '<input type="checkbox" id="check' + i.title.replaceAll(" ","") + '" unchecked>';
+                    newElement.innerHTML += '<h1>' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p>' + i['description'] +'</p>';
+                }
                 container.innerHTML += '<br>';
             }
+            makeleft();
+            document.getElementById(key).style.backgroundColor = 'yellow';
+            document.getElementById('delete'+key).style.backgroundColor = 'yellow';
+            document.getElementById('inbox').style.backgroundColor = 'beige';
+            document.getElementById('important').style.backgroundColor = 'beige';
+            currentpro = key;
+            print(currentpro);
+            document.getElementById('addtask').style.display = 'block';
         });   
     }
 }
+
 resetpro();
 clickpro();
 
 document.getElementById('inbox').addEventListener("click",()=>{
     makeright();
+    makeleft();
 });
 
 document.getElementById('important').addEventListener("click",()=>{
@@ -183,11 +237,21 @@ document.getElementById('important').addEventListener("click",()=>{
             if(i['priority']) {
                 let newElement = document.createElement("div");
                 container.appendChild(newElement).className = 'task';
-                newElement.innerHTML = '<h1>' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p>' + i['description'] +'</p>';
+                if(i['status']) {
+                    newElement.innerHTML = '<input type="checkbox" id="check' + i.title.replaceAll(" ","") + '" checked>';
+                    newElement.innerHTML += '<h1 id="complete">' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p id="complete">' + i['description'] +'</p>';
+                }
+                else {
+                    newElement.innerHTML = '<input type="checkbox" id="check' + i.title.replaceAll(" ","") + '" unchecked>';
+                    newElement.innerHTML += '<h1>' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p>' + i['description'] +'</p>';
+                }
                 container.innerHTML += '<br>';
             }
         }
     }
+    makeleft();
+    document.getElementById('inbox').style.backgroundColor = 'beige';
+    document.getElementById('important').style.backgroundColor = 'yellow';
     document.getElementById('taskDetails').style.display = 'none';
 });
 
