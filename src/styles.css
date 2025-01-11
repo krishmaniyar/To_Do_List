@@ -11,14 +11,14 @@ body {
 }
 
 .mainleft {
-    flex: 1;
+    flex: 0.7;
     background-color: beige;
     min-height: 90vh;
     height: auto;
 }
 
 .topbar {
-    background-color: aliceblue;
+    background-color: rgb(182, 182, 166);
     height: 10vh;
     text-align: center;
     align-items: center;

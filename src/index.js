@@ -96,12 +96,7 @@ document.getElementById('proadd').addEventListener("click",()=> {
 });
 
 document.getElementById('cancel').addEventListener("click",() =>{
-    if(document.getElementById('ProjectDetails').style.display == 'block') {
-        document.getElementById('ProjectDetails').style.display = 'none';
-    }
-    else {
-        document.getElementById('ProjectDetails').style.display = 'block';
-    }
+    document.getElementById('ProjectDetails').style.display = 'none';
     document.getElementById('proName').value = '';
 });
 
@@ -127,7 +122,16 @@ document.getElementById('getProject').addEventListener("click",() => {
 });
 
 document.getElementById('addtask').addEventListener("click",() => {
-    document.getElementById('taskDetails').style.display = 'block';
+    if(document.getElementById('taskDetails').style.display == 'block') {
+        document.getElementById('taskDetails').style.display = 'none';
+    }
+    else if(document.getElementById('taskDetails').style.display == 'none'){
+        document.getElementById('taskDetails').style.display = 'block';
+    }
+});
+
+document.getElementById('cancelTask').addEventListener("click",() => {
+    document.getElementById('taskDetails').style.display = 'none';
 });
 
 document.getElementById('getTask').addEventListener("click",() =>{
