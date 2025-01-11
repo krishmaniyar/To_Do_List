@@ -7,21 +7,34 @@ body {
 .container {
     display: flex;
     flex-wrap: wrap;
-    height: 90vh;
+    height: max-content;
 }
 
 .mainleft {
     flex: 1;
     background-color: beige;
-    height: 100%;
+    min-height: 90vh;
+    height: auto;
 }
 
 .topbar {
     background-color: aliceblue;
     height: 10vh;
     text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
 
+.dashboard {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.dashboard > img {
+    height: 40px;
+}
 .home > h1 {
     margin: 0%;
     padding-top: 10px;
@@ -63,6 +76,8 @@ hr {
 
 .heading {
     height: 8vh;
+    padding-left: 0px;
+    padding-right: 0px;
     padding: 1vh;
     align-items: center;
     display: inline-flex;
@@ -82,8 +97,13 @@ hr {
 .project {
     background-color: beige;
     margin-left: 10px;
+    display: inline-flex;
+    width: 90%;
 }
 
+.option {
+    justify-content: end;
+}
 
 .project > button {
     background-color: beige;
@@ -96,6 +116,7 @@ hr {
     padding-bottom: 10px;
 }
 
+
 .project > button > img {
     height: 25px;
 }
@@ -103,6 +124,53 @@ hr {
 .project > button > h1 {
     padding-left: 10px;
     margin: 0px;
+}
+
+#ProjectDetails {
+    padding-left: 10px;
+}
+
+#ProjectDetails > #getProject {
+    margin-top: 10px;
+    margin-left: 30px;
+    background-color: green;
+    width: 80px;
+    border: 0px;
+    font-size: 1em;
+    color: white;
+    font-weight: bold;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+#ProjectDetails > #cancel {
+    margin-top: 10px;
+    margin-left: 10px;
+    background-color: red;
+    width: 80px;
+    border: 0px;
+    font-size: 1em;
+    color: white;
+    font-weight: bold;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+#proInfo {
+    display: flex;
+    align-items: center;
+}
+
+#proName {
+    font-size: 1em;
+    background-color: beige;
+    margin-left: 10px;
+    padding: 5px;
+    border: 1px solid black;
+}
+
+#proInfo > img {
+    height: 25px;
 }
 
 #right {
@@ -153,4 +221,47 @@ hr {
     height: 5vh;
     width: 5vh;
     right: 20px;
+}
+
+#taskDetails {
+    border-radius: 20px;
+    padding: 15px;
+    margin: 20px;
+    background-color: aliceblue;
+    font-size: 1.2em;
+}
+
+#taskinfo > input {
+    font-size: 0.8em;
+    width: 100%;
+    padding: 5px;
+}
+
+#taskDetails > #getTask {
+    margin-left: 20px;
+    font-size: 0.8em;
+    border-radius: 10px;
+    padding: 10px;
+    border: 0px;
+    width: 100px;
+    background-color: green;
+    color: white;
+    font-weight: bold;
+}
+
+#taskDetails > #cancelTask {
+    margin-left: 20px;
+    font-size: 0.8em;
+    border-radius: 10px;
+    padding: 10px;
+    border: 0px;
+    width: 100px;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+
+#taskinfo {
+    margin: 20px;
+    margin-top: 10px;
 }

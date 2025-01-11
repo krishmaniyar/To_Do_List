@@ -6,6 +6,9 @@
     <title>To Do List</title>
 </head>
 <body>
+    <div class="dashboard" id="dashboard">
+        <img src="./view-dashboard.svg" alt="">
+    </div>
     <div class="topbar">
         <div class="heading">
             <img src="./check-circle-outline.svg" alt="tick_mark">
@@ -13,7 +16,7 @@
         </div>
     </div>
     <div class="container">
-        <div class="mainleft">
+        <div class="mainleft" id="mainleft">
             <div class="home">
                 <h1>Home</h1>
                 <hr>
@@ -45,11 +48,22 @@
             </div>
             <div id="left">
             </div>
+            <div id="ProjectDetails">
+                <form id="proInfo" method="get">
+                    <img src="./format-list-bulleted.svg" alt="list">
+                    <input type="text" id="proName" name="details" placeholder="Enter Projcet Name" required>
+                </form>
+                <button type="submit" name="details" id="getProject">Add</button>
+                <button type="submit" name="details" id="cancel">Cancel</button>
+            </div>
             <div class="projectadd">
                 <button id="proadd">+</button>
             </div>
             <div id="image">
                 <img src="./format-list-bulleted.svg" alt="">
+                <img src="./dots-vertical.svg" alt="">
+                <img src="./delete.svg" alt="">
+                <img src="./view-dashboard.svg" alt="">
             </div>
         </div>
         <div id="right">
@@ -61,6 +75,23 @@
                 <div class="task">
                     <p>Work1</p>
                 </div>
+            </div>
+            <div id="taskDetails">
+                <form method="get" id="taskinfo">
+                    <label for="title">Title:</label>
+                    <br>
+                    <input type="text" id="title" name="taskdetails" placeholder="Krish" required>
+                    <br>
+                    <label for="text">Description (Optional):</label>
+                    <br>
+                    <input type="text" id="description" placeholder="abcom" name="taskdetails">
+                    <br>
+                    <label for="text">Date</label>
+                    <br>
+                    <input type="date" id="date" name="taskdetails" required>
+                </form>
+                <button type="submit" name="taskdetails" id="getTask">Add</button>
+                <button id="cancelTask">Cancel</button>
             </div>
             <button id="addtask">+</button>
         </div>
