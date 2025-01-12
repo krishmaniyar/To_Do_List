@@ -6,7 +6,7 @@ function isDateInNext7Days(dateToCheck) {
     const next7Days = addDays(today, 7);
     print(today);
     print(dateToCheck);
-    return isWithinInterval(dateToCheck, { start: today, end:  next7Days});
+    return isWithinInterval(dateToCheck, { start: today, end: next7Days });
 }
 
 function isToday(dateToCheck) {
@@ -14,10 +14,10 @@ function isToday(dateToCheck) {
     const next7Days = addDays(today, 1);
     print(today);
     print(dateToCheck);
-    return isWithinInterval(dateToCheck, { start: today, end:  next7Days});
+    return isWithinInterval(dateToCheck, { start: today, end: next7Days });
 }
 
-function handleFormSubmit(dateInput) {
+function isDateInNext7DaysConfirm(dateInput) {
     const userDate = new Date(dateInput);
     if (isDateInNext7Days(userDate)) {
         return true;
@@ -100,7 +100,7 @@ inbox.get('fitness').add("Go for a Run or Jog ", "If weather permits, go outside
 function makeleft() {
     const container = document.getElementById("left");
     container.innerHTML = '';
-    document.getElementById('inbox').style.backgroundColor = 'yellow';
+    document.getElementById('inbox').style.backgroundColor = 'var(--button)';
     document.getElementById('image').innerHTML = '';
     for (const [key] of inbox) {
         let newElement = document.createElement("div");
@@ -112,7 +112,7 @@ function makeleft() {
     resetpro();
     document.getElementById('ProjectDetails').style.display = 'none';
     document.getElementById('mainleft').style.display = 'block';
-    document.getElementById('important').style.backgroundColor = 'beige';
+    document.getElementById('important').style.backgroundColor = 'var(--dashColor)';
 }
 
 function makeright() {
@@ -131,7 +131,7 @@ function makeright() {
                 newElement.innerHTML = '<input type="checkbox" id="check' + i.title.replaceAll(" ", "") + '" unchecked>';
                 newElement.innerHTML += '<h1>' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p>' + i['description'] + '</p>';
             }
-            if(i['priority']) {
+            if (i['priority']) {
                 newElement.innerHTML += "<div class='priority'><button id='priority" + i.index + "'><img src='de7ced177d66bb006694.svg'></button></div>";
             }
             else {
@@ -145,8 +145,8 @@ function makeright() {
     print(currentpro);
     document.getElementById('addtask').style.display = 'none';
     document.getElementById('taskDetails').style.display = 'none';
-    document.getElementById('week').style.backgroundColor = 'beige';
-    document.getElementById('today').style.backgroundColor = 'beige';
+    document.getElementById('week').style.backgroundColor = 'var(--dashColor)';
+    document.getElementById('today').style.backgroundColor = 'var(--dashColor)';
     checkstatus();
     deletetask();
     checkpriority();
@@ -184,7 +184,7 @@ function visdash() {
 visdash();
 
 document.getElementById('getProject').addEventListener("click", () => {
-    newProject(document.getElementById('proName').value.replaceAll(" ",""));
+    newProject(document.getElementById('proName').value.replaceAll(" ", ""));
     makeleft();
     print(inbox);
     document.getElementById('proName').value = '';
@@ -244,7 +244,7 @@ function clickpro() {
                     newElement.innerHTML = '<input type="checkbox" id="check' + i.title.replaceAll(" ", "") + '" unchecked>';
                     newElement.innerHTML += '<h1>' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p>' + i['description'] + '</p>';
                 }
-                if(i['priority']) {
+                if (i['priority']) {
                     newElement.innerHTML += "<div class='priority'><button id='priority" + i.index + "'><img src='de7ced177d66bb006694.svg'></button></div>";
                 }
                 else {
@@ -254,12 +254,12 @@ function clickpro() {
                 container.innerHTML += '<br>';
             }
             makeleft();
-            document.getElementById(key).style.backgroundColor = 'yellow';
-            document.getElementById('delete' + key).style.backgroundColor = 'yellow';
-            document.getElementById('inbox').style.backgroundColor = 'beige';
-            document.getElementById('today').style.backgroundColor = 'beige';
-            document.getElementById('week').style.backgroundColor = 'beige';
-            document.getElementById('important').style.backgroundColor = 'beige';
+            document.getElementById(key).style.backgroundColor = 'var(--button)';
+            document.getElementById('delete' + key).style.backgroundColor = 'var(--button)';
+            document.getElementById('inbox').style.backgroundColor = 'var(--dashColor)';
+            document.getElementById('today').style.backgroundColor = 'var(--dashColor)';
+            document.getElementById('week').style.backgroundColor = 'var(--dashColor)';
+            document.getElementById('important').style.backgroundColor = 'var(--dashColor)';
             currentpro = key;
             print(currentpro);
             checkstatuspro(key);
@@ -278,7 +278,7 @@ document.getElementById('inbox').addEventListener("click", () => {
     makeleft();
 });
 
-document.getElementById('important').addEventListener("click", ()=> {
+document.getElementById('important').addEventListener("click", () => {
     const container = document.getElementById('details');
     container.innerHTML = '';
     for (const [key] of inbox) {
@@ -294,7 +294,7 @@ document.getElementById('important').addEventListener("click", ()=> {
                     newElement.innerHTML = '<input type="checkbox" id="check' + i.index + '" unchecked>';
                     newElement.innerHTML += '<h1>' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p>' + i['description'] + '</p>';
                 }
-                if(i['priority']) {
+                if (i['priority']) {
                     newElement.innerHTML += "<div class='priority'><button id='priority" + i.index + "'><img src='de7ced177d66bb006694.svg'></button></div>";
                 }
                 else {
@@ -309,10 +309,10 @@ document.getElementById('important').addEventListener("click", ()=> {
     deletetaskimp();
     checkstatusimp();
     checkpriorityimp();
-    document.getElementById('inbox').style.backgroundColor = 'beige';
-    document.getElementById('today').style.backgroundColor = 'beige';
-    document.getElementById('week').style.backgroundColor = 'beige';
-    document.getElementById('important').style.backgroundColor = 'yellow';
+    document.getElementById('inbox').style.backgroundColor = 'var(--dashColor)';
+    document.getElementById('today').style.backgroundColor = 'var(--dashColor)';
+    document.getElementById('week').style.backgroundColor = 'var(--dashColor)';
+    document.getElementById('important').style.backgroundColor = 'var(--button)';
     document.getElementById('taskDetails').style.display = 'none';
     document.getElementById('addtask').style.display = 'none';
 });
@@ -322,7 +322,7 @@ document.getElementById('week').addEventListener("click", () => {
     container.innerHTML = '';
     for (const [key] of inbox) {
         for (let i of inbox.get(key).project) {
-            if (handleFormSubmit(i.dueDate)) {
+            if (isDateInNext7DaysConfirm(i.dueDate)) {
                 let newElement = document.createElement("div");
                 container.appendChild(newElement).className = 'task';
                 if (i['status']) {
@@ -333,7 +333,7 @@ document.getElementById('week').addEventListener("click", () => {
                     newElement.innerHTML = '<input type="checkbox" id="check' + i.index + '" unchecked>';
                     newElement.innerHTML += '<h1>' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p>' + i['description'] + '</p>';
                 }
-                if(i['priority']) {
+                if (i['priority']) {
                     newElement.innerHTML += "<div class='priority'><button id='priority" + i.index + "'><img src='de7ced177d66bb006694.svg'></button></div>";
                 }
                 else {
@@ -348,9 +348,9 @@ document.getElementById('week').addEventListener("click", () => {
     deletetaskweek();
     checkstatusweek();
     checkpriorityweek();
-    document.getElementById('inbox').style.backgroundColor = 'beige';
-    document.getElementById('week').style.backgroundColor = 'yellow';
-    document.getElementById('today').style.backgroundColor = 'beige';
+    document.getElementById('inbox').style.backgroundColor = 'var(--dashColor)';
+    document.getElementById('week').style.backgroundColor = 'var(--button)';
+    document.getElementById('today').style.backgroundColor = 'var(--dashColor)';
     document.getElementById('taskDetails').style.display = 'none';
     document.getElementById('addtask').style.display = 'none';
 });
@@ -371,7 +371,7 @@ document.getElementById('today').addEventListener("click", () => {
                     newElement.innerHTML = '<input type="checkbox" id="check' + i.index + '" unchecked>';
                     newElement.innerHTML += '<h1>' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p>' + i['description'] + '</p>';
                 }
-                if(i['priority']) {
+                if (i['priority']) {
                     newElement.innerHTML += "<div class='priority'><button id='priority" + i.index + "'><img src='de7ced177d66bb006694.svg'></button></div>";
                 }
                 else {
@@ -386,9 +386,9 @@ document.getElementById('today').addEventListener("click", () => {
     deletetasktoday();
     checkstatustoday();
     checkprioritytoday();
-    document.getElementById('inbox').style.backgroundColor = 'beige';
-    document.getElementById('today').style.backgroundColor = 'yellow';
-    document.getElementById('week').style.backgroundColor = 'beige';
+    document.getElementById('inbox').style.backgroundColor = 'var(--dashColor)';
+    document.getElementById('today').style.backgroundColor = 'var(--button)';
+    document.getElementById('week').style.backgroundColor = 'var(--dashColor)';
     document.getElementById('taskDetails').style.display = 'none';
     document.getElementById('addtask').style.display = 'none';
 });
@@ -472,7 +472,7 @@ function checkstatustoday() {
 function checkstatusweek() {
     for (const [key] of inbox) {
         for (let i of inbox.get(key).project) {
-            if (handleFormSubmit(i.dueDate)) {
+            if (isDateInNext7DaysConfirm(i.dueDate)) {
                 document.getElementById('check' + i.index).addEventListener("change", () => {
                     if (i['status']) {
                         i['status'] = false;
@@ -531,7 +531,7 @@ function checkprioritytoday() {
 function checkpriorityweek() {
     for (const [key] of inbox) {
         for (let i of inbox.get(key).project) {
-            if (handleFormSubmit(i.dueDate)) {
+            if (isDateInNext7DaysConfirm(i.dueDate)) {
                 document.getElementById('priority' + i.index).addEventListener("click", () => {
                     if (i['priority']) {
                         i['priority'] = false;
@@ -583,10 +583,10 @@ function checkprioritypro(name) {
 function deletetaskpro(key) {
     for (let i of inbox.get(key).project) {
         document.getElementById('delete' + i.index).addEventListener("click", () => {
-            if (i['proindex'] == 0){
+            if (i['proindex'] == 0) {
                 inbox.get(key).project.splice(0, 1);
             }
-            else{
+            else {
                 print(i.proindex);
                 inbox.get(key).project.splice(i['proindex'], i['proindex']);
             }
@@ -596,9 +596,9 @@ function deletetaskpro(key) {
     }
 }
 
-function resetproid(key,proindex) {
+function resetproid(key, proindex) {
     for (let i of inbox.get(key).project) {
-        if(i['proindex'] > proindex && i.proindex>0) {
+        if (i['proindex'] > proindex && i.proindex > 0) {
             print('hi');
             print(i.proindex);
             i.proindex--;
@@ -610,14 +610,13 @@ function deletetask() {
     for (const [key] of inbox) {
         for (let i of inbox.get(key).project) {
             document.getElementById('delete' + i.index).addEventListener("click", () => {
-                if (i['proindex'] == 0)
-                {
+                if (i['proindex'] == 0) {
                     inbox.get(key).project.splice(0, 1);
-                    resetproid(key,i.proindex);
+                    resetproid(key, i.proindex);
                 }
-                else{
-                    inbox.get(key).project.splice(i['proindex'],i['proindex']);
-                    resetproid(key,i.proindex)
+                else {
+                    inbox.get(key).project.splice(i['proindex'], i['proindex']);
+                    resetproid(key, i.proindex)
                 }
                 makeleft();
                 makeright();
@@ -631,15 +630,14 @@ function deletetaskimp() {
         for (let i of inbox.get(key).project) {
             if (i['priority']) {
                 document.getElementById('delete' + i['index']).addEventListener("click", () => {
-                    if (i['proindex'] == 0)
-                        {
-                            inbox.get(key).project.splice(0, 1);
-                            resetproid(key,i.proindex);
-                        }
-                        else{
-                            inbox.get(key).project.splice(i['proindex'],i['proindex']);
-                            resetproid(key,i.proindex)
-                        }
+                    if (i['proindex'] == 0) {
+                        inbox.get(key).project.splice(0, 1);
+                        resetproid(key, i.proindex);
+                    }
+                    else {
+                        inbox.get(key).project.splice(i['proindex'], i['proindex']);
+                        resetproid(key, i.proindex)
+                    }
                     makeright();
                     makeleft();
                 });
@@ -653,16 +651,14 @@ function deletetasktoday() {
         for (let i of inbox.get(key).project) {
             if (isTodayConfirm(i.dueDate)) {
                 document.getElementById('delete' + i['index']).addEventListener("click", () => {
-                    if (i['proindex'] == 0)
-                    {
+                    if (i['proindex'] == 0) {
                         inbox.get(key).project.splice(0, 1);
-                        resetproid(key,i.proindex);
+                        resetproid(key, i.proindex);
                     }
-                    else{
-                        inbox.get(key).project.splice(i['proindex'],i['proindex']);
-                        resetproid(key,i.proindex)
+                    else {
+                        inbox.get(key).project.splice(i['proindex'], i['proindex']);
+                        resetproid(key, i.proindex)
                     }
-                    print(i['index']);
                     makeright();
                     makeleft();
                 });
@@ -674,18 +670,16 @@ function deletetasktoday() {
 function deletetaskweek() {
     for (const [key] of inbox) {
         for (let i of inbox.get(key).project) {
-            if (handleFormSubmit(i.dueDate)) {
+            if (isDateInNext7DaysConfirm(i.dueDate)) {
                 document.getElementById('delete' + i['index']).addEventListener("click", () => {
-                    if (i['proindex'] == 0)
-                    {
+                    if (i['proindex'] == 0) {
                         inbox.get(key).project.splice(0, 1);
-                        resetproid(key,i.proindex);
+                        resetproid(key, i.proindex);
                     }
-                    else{
-                        inbox.get(key).project.splice(i['proindex'],i['proindex']);
-                        resetproid(key,i.proindex)
+                    else {
+                        inbox.get(key).project.splice(i['proindex'], i['proindex']);
+                        resetproid(key, i.proindex)
                     }
-                    print(i['index']);
                     makeright();
                     makeleft();
                 });
@@ -693,5 +687,3 @@ function deletetaskweek() {
         }
     }
 }
-
-print(inbox);

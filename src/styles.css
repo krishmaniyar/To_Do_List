@@ -1,9 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Jersey+15&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Playwrite+VN:wght@100..400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Rubik+Vinyl&family=Sofadi+One&display=swap');body {
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Playwrite+VN:wght@100..400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Rubik+Vinyl&family=Sofadi+One&display=swap');
+body {
     padding: 0%;
     background-color: rgb(167, 160, 160);
     margin: 0%;
     font-family: "PT Serif";
     font-size: 0.9em;
+}
+
+:root {
+    --bgColor: white;
+    --dashColor: grey;
+    --topbar: beige;
+    --button: rgba(255, 255, 0, 0.48);
+    --buttonfont: black;
 }
 
 .container {
@@ -14,13 +23,13 @@
 
 .mainleft {
     flex: 0.9;
-    background-color: beige;
+    background-color: var(--dashColor);
     min-height: 90vh;
     height: auto;
 }
 
 .topbar {
-    background-color: rgb(182, 182, 166);
+    background-color: var(--topbar);
     height: 10vh;
     text-align: center;
     align-items: center;
@@ -73,7 +82,7 @@ hr {
     text-align: center;
     align-items: center;
     font-family: "PT Serif";
-    background-color: beige;
+    background-color: var(--dashColor);
 } 
 
 .homeOptions > button > img {
@@ -101,7 +110,7 @@ hr {
 }
 
 .project {
-    background-color: beige;
+    background-color: var(--dashColor);
     margin-left: 10px;
     display: grid;
     grid-template-columns: 6fr 1fr;
@@ -111,7 +120,7 @@ hr {
 
 .project > button {
     font-size: 0.8em;
-    background-color: beige;
+    background-color: var(--dashColor);
     align-items: center;
     border: 0px;
     display: inline-flex;
@@ -172,7 +181,7 @@ button.option {
 
 #proName {
     font-size: 1em;
-    background-color: beige;
+    background-color: var(--topbar);
     margin-left: 10px;
     padding: 5px;
     border: 1px solid black;
@@ -193,7 +202,7 @@ button.option {
 }
 
 .task {
-    background-color: antiquewhite;
+    background-color: var(--topbar);
     display: flex;
     padding: 15px;
     align-items: center;
@@ -212,7 +221,8 @@ button.option {
 }
 
 #proadd {
-    background-color: chocolate;
+    background-color: var(--button);
+    color: var(--buttonfont);
     border: 0px;
     height: 5vh;
     width: 5vh;
@@ -222,15 +232,13 @@ button.option {
 }
 
 #addtask {
-    /* position:fixed; */
-    background-color: chocolate;
-    /* bottom: 10px; */
+    background-color: var(--button);
+    color: var(--buttonfont);
     margin-left: 20px;
     border: 0px;
     border-radius: 30px;
     padding: 10px;
     font-size: 1.5em;
-    /* right: 20px; */
 }
 
 #taskDetails {
@@ -283,7 +291,7 @@ button.option {
 .task > button {
     padding: 0%;
     border: 0px;
-    background-color: beige;
+    background-color: var(--topbar);
     position: absolute;
     right: 30px;
 }
@@ -291,7 +299,7 @@ button.option {
 .task > .priority > button {
     padding: 0%;
     border: 0px;
-    background-color: beige;
+    background-color: var(--topbar);
 }
 
 .task > .priority > button > img {
