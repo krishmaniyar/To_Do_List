@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Jersey+15&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Playwrite+VN:wght@100..400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Rubik+Vinyl&family=Sofadi+One&display=swap');
 body {
     padding: 0%;
-    background-color: rgb(167, 160, 160);
+    background-color: var(--bgColor);
     margin: 0%;
     font-family: "PT Serif";
     font-size: 0.9em;
 }
 
 :root {
-    --bgColor: white;
-    --dashColor: grey;
-    --topbar: beige;
-    --button: rgba(255, 255, 0, 0.48);
+    --bgColor: rgb(106, 106, 106);
+    --dashColor: rgb(121, 121, 132);
+    --topbar: rgb(162, 169, 169);
+    --button: rgba(249, 249, 188, 0.48);
     --buttonfont: black;
 }
 
