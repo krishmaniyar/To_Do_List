@@ -278,7 +278,7 @@ document.getElementById('inbox').addEventListener("click", () => {
     makeleft();
 });
 
-document.getElementById('important').addEventListener("click", () => {
+document.getElementById('important').addEventListener("click", ()=> {
     const container = document.getElementById('details');
     container.innerHTML = '';
     for (const [key] of inbox) {
