@@ -1,7 +1,9 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Playwrite+VN:wght@100..400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Rubik+Vinyl&family=Sofadi+One&display=swap');body {
     padding: 0%;
     background-color: rgb(167, 160, 160);
     margin: 0%;
+    font-family: "PT Serif";
+    font-size: 0.9em;
 }
 
 .container {
@@ -11,7 +13,7 @@ body {
 }
 
 .mainleft {
-    flex: 0.7;
+    flex: 0.9;
     background-color: beige;
     min-height: 90vh;
     height: auto;
@@ -39,12 +41,14 @@ body {
     margin: 0%;
     padding-top: 10px;
     padding-left: 10px;
+    font-family: "PT Serif";
 }
 
 .projects > h1 {
     margin: 0%;
     padding-top: 10px;
     padding-left: 10px;
+    font-family: "PT Serif";
 }
 
 hr {
@@ -68,6 +72,7 @@ hr {
     display: inline-flex;
     text-align: center;
     align-items: center;
+    font-family: "PT Serif";
     background-color: beige;
 } 
 
@@ -98,15 +103,14 @@ hr {
 .project {
     background-color: beige;
     margin-left: 10px;
-    display: inline-flex;
+    display: grid;
+    grid-template-columns: 6fr 1fr;
     width: 90%;
 }
 
-.option {
-    justify-content: end;
-}
 
 .project > button {
+    font-size: 0.8em;
     background-color: beige;
     align-items: center;
     border: 0px;
@@ -115,8 +119,12 @@ hr {
     width: 100%;
     text-align: start;
     padding-bottom: 10px;
+    font-family: "PT Serif";
 }
 
+button.option {
+    justify-content: end;
+}
 
 .project > button > img {
     height: 25px;
@@ -181,6 +189,7 @@ hr {
 
 #right > #details {
     padding: 20px;
+    padding-bottom: 10px;
 }
 
 .task {
@@ -213,15 +222,15 @@ hr {
 }
 
 #addtask {
-    position:fixed;
+    /* position:fixed; */
     background-color: chocolate;
-    bottom: 10px;
+    /* bottom: 10px; */
+    margin-left: 20px;
     border: 0px;
     border-radius: 30px;
-    font-size: 2em;
-    height: 5vh;
-    width: 5vh;
-    right: 20px;
+    padding: 10px;
+    font-size: 1.5em;
+    /* right: 20px; */
 }
 
 #taskDetails {
