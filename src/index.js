@@ -5,6 +5,7 @@ function print(message) {
 }
 
 let no_of_task = [];
+let num = 0;
 
 class Task {
     constructor(title, description, dueDate, priority) {
@@ -13,6 +14,7 @@ class Task {
         this.dueDate = dueDate;
         this.priority = priority;
         this.status = false;
+        this.index = num;
     }
 }
 
@@ -29,12 +31,13 @@ class Project {
     add(title, description, dueDate, priority, status) {
         this.project.push(new Task(title, description, dueDate, priority, status));
         no_of_task[this.index]++;
+        num++;
     }
 }
 
 function newProject(name) {
     const project = new Project();
-    inbox.set(name,project);
+    inbox.set(name, project);
 }
 
 function deleteProject(name) {
@@ -48,19 +51,19 @@ newProject('home');
 newProject('work');
 newProject('fitness');
 
-inbox.get('home').add("Organize Your Closet ","Sort clothes by season, donate those you no longer wear.","2025-09-27",true);
-inbox.get('work').add("Organize Your Digital Workspace","Clean up your desktop, organize folders, and delete unnecessary files.","2025-09-27",false);
-inbox.get('work').add("Set Clear Goals for the Week","Write down specific, measurable, and achievable goals for work.","2025-09-27",false);
-inbox.get('work').add("Take an Online Course","Find a course related to your industry or a new skill you want to learn.","2025-09-27",false);
-inbox.get('fitness').add("Full-Body Workout","Incorporate exercises like squats, push-ups, lunges, and planks to work multiple muscle groups.","2025-09-27",true);
-inbox.get('fitness').add("Go for a Run or Jog ","If weather permits, go outside for a run or jog, or use a treadmill.","2025-09-27",false);
+inbox.get('home').add("Organize Your Closet ", "Sort clothes by season, donate those you no longer wear.", "2025-09-27", true);
+inbox.get('work').add("Organize Your Digital Workspace", "Clean up your desktop, organize folders, and delete unnecessary files.", "2025-09-27", false);
+inbox.get('work').add("Set Clear Goals for the Week", "Write down specific, measurable, and achievable goals for work.", "2025-09-27", false);
+inbox.get('work').add("Take an Online Course", "Find a course related to your industry or a new skill you want to learn.", "2025-09-27", false);
+inbox.get('fitness').add("Full-Body Workout", "Incorporate exercises like squats, push-ups, lunges, and planks to work multiple muscle groups.", "2025-09-27", true);
+inbox.get('fitness').add("Go for a Run or Jog ", "If weather permits, go outside for a run or jog, or use a treadmill.", "2025-09-27", false);
 
 function makeleft() {
     const container = document.getElementById("left");
     container.innerHTML = '';
     document.getElementById('inbox').style.backgroundColor = 'yellow';
     document.getElementById('image').innerHTML = '';
-    for(const [key] of inbox) {
+    for (const [key] of inbox) {
         let newElement = document.createElement("div");
         container.appendChild(newElement).className = 'project';
         newElement.innerHTML += "<button id=" + key + "><img src='./365f3e7f182c9f913994.svg' alt='project'><h1>" + key + "</h1></button>";
@@ -76,18 +79,25 @@ function makeleft() {
 function makeright() {
     const container = document.getElementById('details');
     container.innerHTML = '';
-    for(const [key] of inbox) {
-        for(let i of inbox.get(key).project) {
+    for (const [key] of inbox) {
+        for (let i of inbox.get(key).project) {
             let newElement = document.createElement("div");
             container.appendChild(newElement).className = 'task';
-            if(i['status']) {
-                newElement.innerHTML = '<input type="checkbox" id="check' + i.title.replaceAll(" ","") + '" checked>';
-                newElement.innerHTML += '<h1 id="complete">' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p id="complete">' + i['description'] +'</p>';
+            if (i['status']) {
+                newElement.innerHTML = '<input type="checkbox" id="check' + i.title.replaceAll(" ", "") + '" checked>';
+                newElement.innerHTML += '<h1 id="complete">' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p id="complete">' + i['description'] + '</p>';
             }
             else {
-                newElement.innerHTML = '<input type="checkbox" id="check' + i.title.replaceAll(" ","") + '" unchecked>';
-                newElement.innerHTML += '<h1>' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p>' + i['description'] +'</p>';
+                newElement.innerHTML = '<input type="checkbox" id="check' + i.title.replaceAll(" ", "") + '" unchecked>';
+                newElement.innerHTML += '<h1>' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p>' + i['description'] + '</p>';
             }
+            if(i['priority']) {
+                newElement.innerHTML += "<div class='priority'><button id='priority" + i.index + "'><img src='de7ced177d66bb006694.svg'></button></div>";
+            }
+            else {
+                newElement.innerHTML += "<div class='priority'><button id='priority" + i.index + "'><img src='c2e6e6dd118d33c26922.svg'></button></div>";
+            }
+            newElement.innerHTML += "<button id='delete" + i.index + "'><img src='bde675c38d54979f589e.svg'></button>";
             container.innerHTML += '<br>';
         }
     }
@@ -95,13 +105,16 @@ function makeright() {
     print(currentpro);
     document.getElementById('addtask').style.display = 'none';
     document.getElementById('taskDetails').style.display = 'none';
+    checkstatus();
+    deletetask();
+    checkpriority();
 }
 
 makeleft();
 makeright();
 
-document.getElementById('proadd').addEventListener("click",()=> {
-    if(document.getElementById('ProjectDetails').style.display == 'block') {
+document.getElementById('proadd').addEventListener("click", () => {
+    if (document.getElementById('ProjectDetails').style.display == 'block') {
         document.getElementById('ProjectDetails').style.display = 'none';
     }
     else {
@@ -109,44 +122,26 @@ document.getElementById('proadd').addEventListener("click",()=> {
     }
 });
 
-document.getElementById('cancel').addEventListener("click",() =>{
+document.getElementById('cancel').addEventListener("click", () => {
     document.getElementById('ProjectDetails').style.display = 'none';
     document.getElementById('proName').value = '';
 });
 
 function visdash() {
-    document.getElementById('dashboard').addEventListener("click",() =>{
-        if(document.getElementById('mainleft').style.display == 'block') {
+    document.getElementById('dashboard').addEventListener("click", () => {
+        if (document.getElementById('mainleft').style.display == 'block') {
             document.getElementById('mainleft').style.display = 'none';
         }
-        else if(document.getElementById('mainleft').style.display == 'none'){
+        else if (document.getElementById('mainleft').style.display == 'none') {
             document.getElementById('mainleft').style.display = 'block';
         }
     });
 }
 
-function checkstatus() {
-    for(const [key] of inbox) {
-        for(let i of inbox.get(key).project) {
-            document.getElementById('check' + i['title'].replaceAll(" ","")).addEventListener("change",() =>{
-                if(i['status']) {
-                    i['status'] = false;
-                }
-                else {
-                    i['status'] = true;
-                }
-                print(i.title + i['status']);
-                makeright();
-            });
-        }
-    }
-}
-
-checkstatus();
 
 visdash();
 
-document.getElementById('getProject').addEventListener("click",() => {
+document.getElementById('getProject').addEventListener("click", () => {
     newProject(document.getElementById('proName').value);
     makeleft();
     print(inbox);
@@ -154,25 +149,25 @@ document.getElementById('getProject').addEventListener("click",() => {
     clickpro();
 });
 
-document.getElementById('addtask').addEventListener("click",() => {
-    if(document.getElementById('taskDetails').style.display == 'block') {
+document.getElementById('addtask').addEventListener("click", () => {
+    if (document.getElementById('taskDetails').style.display == 'block') {
         document.getElementById('taskDetails').style.display = 'none';
     }
-    else if(document.getElementById('taskDetails').style.display == 'none'){
+    else if (document.getElementById('taskDetails').style.display == 'none') {
         document.getElementById('taskDetails').style.display = 'block';
     }
 });
 
-document.getElementById('cancelTask').addEventListener("click",() => {
+document.getElementById('cancelTask').addEventListener("click", () => {
     document.getElementById('taskDetails').style.display = 'none';
 });
 
-document.getElementById('getTask').addEventListener("click",() =>{
-    print( document.getElementById('title').value);
+document.getElementById('getTask').addEventListener("click", () => {
+    print(document.getElementById('title').value);
     var title = document.getElementById('title').value;
     var description = document.getElementById('description').value;
     var dueDate = document.getElementById('date').value;
-    inbox.get(currentpro).add(title,description,dueDate,false);
+    inbox.get(currentpro).add(title, description, dueDate, false);
     document.getElementById('date').value = '';
     document.getElementById('title').value = '';
     document.getElementById('description').value = '';
@@ -181,8 +176,8 @@ document.getElementById('getTask').addEventListener("click",() =>{
 });
 
 function resetpro() {
-    for(const [key] of inbox) {
-        document.getElementById('delete'+key).addEventListener("click",()=> {
+    for (const [key] of inbox) {
+        document.getElementById('delete' + key).addEventListener("click", () => {
             deleteProject(key)
             makeright();
             makeleft();
@@ -192,64 +187,84 @@ function resetpro() {
 }
 
 function clickpro() {
-    for(const [key] of inbox) {
-        document.getElementById(key).addEventListener("click",() =>{
+    for (const [key] of inbox) {
+        document.getElementById(key).addEventListener("click", () => {
             const container = document.getElementById('details');
             container.innerHTML = '';
-            for(let i of inbox.get(key).project) {
+            for (let i of inbox.get(key).project) {
                 let newElement = document.createElement("div");
                 container.appendChild(newElement).className = 'task';
-                if(i['status']) {
-                    newElement.innerHTML = '<input type="checkbox" id="check' + i.title.replaceAll(" ","") + '" checked>';
-                    newElement.innerHTML += '<h1 id="complete">' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p id="complete">' + i['description'] +'</p>';
+                if (i['status']) {
+                    newElement.innerHTML = '<input type="checkbox" id="check' + i.title.replaceAll(" ", "") + '" checked>';
+                    newElement.innerHTML += '<h1 id="complete">' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p id="complete">' + i['description'] + '</p>';
                 }
                 else {
-                    newElement.innerHTML = '<input type="checkbox" id="check' + i.title.replaceAll(" ","") + '" unchecked>';
-                    newElement.innerHTML += '<h1>' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p>' + i['description'] +'</p>';
+                    newElement.innerHTML = '<input type="checkbox" id="check' + i.title.replaceAll(" ", "") + '" unchecked>';
+                    newElement.innerHTML += '<h1>' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p>' + i['description'] + '</p>';
+                    if(i['priority']) {
+                        newElement.innerHTML += "<div class='priority'><button id='priority" + i.index + "'><img src='de7ced177d66bb006694.svg'></button></div>";
+                    }
+                    else {
+                        newElement.innerHTML += "<div class='priority'><button id='priority" + i.index + "'><img src='c2e6e6dd118d33c26922.svg'></button></div>";
+                    }
+                    newElement.innerHTML += "<button id='delete" + i.index + "'><img src='bde675c38d54979f589e.svg'></button>";
                 }
                 container.innerHTML += '<br>';
             }
             makeleft();
             document.getElementById(key).style.backgroundColor = 'yellow';
-            document.getElementById('delete'+key).style.backgroundColor = 'yellow';
+            document.getElementById('delete' + key).style.backgroundColor = 'yellow';
             document.getElementById('inbox').style.backgroundColor = 'beige';
             document.getElementById('important').style.backgroundColor = 'beige';
             currentpro = key;
             print(currentpro);
+            checkstatuspro(key);
+            deletetaskpro(key);
+            checkprioritypro(key);
             document.getElementById('addtask').style.display = 'block';
-        });   
+        });
     }
 }
 
 resetpro();
 clickpro();
 
-document.getElementById('inbox').addEventListener("click",()=>{
+document.getElementById('inbox').addEventListener("click", () => {
     makeright();
     makeleft();
 });
 
-document.getElementById('important').addEventListener("click",()=>{
+document.getElementById('important').addEventListener("click", () => {
     const container = document.getElementById('details');
     container.innerHTML = '';
-    for(const [key] of inbox) {
-        for(let i of inbox.get(key).project) {
-            if(i['priority']) {
+    for (const [key] of inbox) {
+        for (let i of inbox.get(key).project) {
+            if (i['priority']) {
                 let newElement = document.createElement("div");
                 container.appendChild(newElement).className = 'task';
-                if(i['status']) {
-                    newElement.innerHTML = '<input type="checkbox" id="check' + i.title.replaceAll(" ","") + '" checked>';
-                    newElement.innerHTML += '<h1 id="complete">' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p id="complete">' + i['description'] +'</p>';
+                if (i['status']) {
+                    newElement.innerHTML = '<input type="checkbox" id="check' + i.index + '" checked>';
+                    newElement.innerHTML += '<h1 id="complete">' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p id="complete">' + i['description'] + '</p>';
                 }
                 else {
-                    newElement.innerHTML = '<input type="checkbox" id="check' + i.title.replaceAll(" ","") + '" unchecked>';
-                    newElement.innerHTML += '<h1>' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p>' + i['description'] +'</p>';
+                    newElement.innerHTML = '<input type="checkbox" id="check' + i.index + '" unchecked>';
+                    newElement.innerHTML += '<h1>' + i['title'] + '</h1>' + '<h1>:</h1>' + '<p>' + i['description'] + '</p>';
                 }
+                if(i['priority']) {
+                    newElement.innerHTML += "<div class='priority'><button id='priority" + i.index + "'><img src='de7ced177d66bb006694.svg'></button></div>";
+                }
+                else {
+                    newElement.innerHTML += "<div class='priority'><button id='priority" + i.index + "'><img src='c2e6e6dd118d33c26922.svg'></button></div>";
+                }
+                newElement.innerHTML += "<button id='delete" + i.index + "'><img src='bde675c38d54979f589e.svg'></button>";
                 container.innerHTML += '<br>';
             }
         }
     }
     makeleft();
+    deletetaskimp();
+    checkstatusimp();
+    checkpriorityimp();
     document.getElementById('inbox').style.backgroundColor = 'beige';
     document.getElementById('important').style.backgroundColor = 'yellow';
     document.getElementById('taskDetails').style.display = 'none';
@@ -257,3 +272,147 @@ document.getElementById('important').addEventListener("click",()=>{
 
 print(inbox);
 // print(inbox.get('home').project[0]['title']);
+
+function checkstatus() {
+    for (const [key] of inbox) {
+        for (let i of inbox.get(key).project) {
+            document.getElementById('check' + i['title'].replaceAll(" ", "")).addEventListener("change", () => {
+                if (i['status']) {
+                    i['status'] = false;
+                }
+                else {
+                    i['status'] = true;
+                }
+                print(i.title + i['status']);
+                makeright();
+                makeleft();
+            });
+        }
+    }
+}
+
+function checkpriority() {
+    for (const [key] of inbox) {
+        for (let i of inbox.get(key).project) {
+            document.getElementById('priority' + i.index).addEventListener("click", () => {
+                if (i['priority']) {
+                    i['priority'] = false;
+                }
+                else {
+                    i['priority'] = true;
+                }
+                makeright();
+                makeleft();
+            });
+        }
+    }
+}
+
+function checkstatusimp() {
+    for (const [key] of inbox) {
+        for (let i of inbox.get(key).project) {
+            if (i['priority']) {
+                document.getElementById('check' + i.index).addEventListener("change", () => {
+                    if (i['status']) {
+                        i['status'] = false;
+                    }
+                    else {
+                        i['status'] = true;
+                    }
+                    makeright();
+                    makeleft();
+                });
+            }
+        }
+    }
+}
+
+function checkpriorityimp() {
+    for (const [key] of inbox) {
+        for (let i of inbox.get(key).project) {
+            if (i['priority']) {
+                document.getElementById('priority' + i.index).addEventListener("click", () => {
+                    if (i['priority']) {
+                        i['priority'] = false;
+                    }
+                    else {
+                        i['priority'] = true;
+                    }
+                    print(i.title + i['priority']);
+                    makeright();
+                    makeleft();
+                });
+            }
+        }
+    }
+}
+
+function checkstatuspro(name) {
+    for (let i of inbox.get(name).project) {
+        document.getElementById('check' + i['title'].replaceAll(" ", "")).addEventListener("change", () => {
+            if (i['status']) {
+                i['status'] = false;
+            }
+            else {
+                i['status'] = true;
+            }
+            print(i.title + i['status']);
+            makeright();
+            makeleft();
+        });
+    }
+}
+
+function checkprioritypro(name) {
+    for (let i of inbox.get(name).project) {
+        document.getElementById('priority' + i.index).addEventListener("click", () => {
+            if (i['priority']) {
+                i['priority'] = false;
+            }
+            else {
+                i['priority'] = true;
+            }
+            print(i.title + i['priority']);
+            makeright();
+            makeleft();
+        });
+    }
+}
+
+function deletetaskpro(key) {
+    for (let i of inbox.get(key).project) {
+        document.getElementById('delete' + i.index).addEventListener("click", () => {
+            inbox.get(key).project.splice(i['title']);
+            makeright();
+            makeleft();
+        });
+    }
+}
+
+function deletetask() {
+    for (const [key] of inbox) {
+        for (let i of inbox.get(key).project) {
+            document.getElementById('delete' + i.index).addEventListener("click", () => {
+                inbox.get(key).project.splice(i['title']);
+                makeright();
+                makeleft();
+            });
+        }
+    }
+}
+
+function deletetaskimp() {
+    for (const [key] of inbox) {
+        for (let i of inbox.get(key).project) {
+            if (i['priority']) {
+                document.getElementById('delete' + i['index']).addEventListener("click", () => {
+                    inbox.get(key).project.splice(i['title']);
+                    makeright();
+                    makeleft();
+                });
+            }
+        }
+    }
+}
+
+print(inbox);
